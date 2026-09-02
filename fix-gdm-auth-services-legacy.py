@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""51.beta regression fixes for GDM re-authentication (e.g. unlocking the
-screen). Upstream tightened a couple of reset/username guards in a way
-that stops soft resets and mechanism auto-selection from firing outside
-the dedicated re-auth path - relax them so they still fire whenever
-there's a known user.
-
-Run from the gnome-shell source root - this is invoked from
-overlay.nix's postPatch, not meant to be run standalone.
-"""
 import sys
 
 PATH = "js/gdm/authServicesLegacy.js"

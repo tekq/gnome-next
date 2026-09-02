@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""51.beta regression fix for the GDM login logo.
-
-Upstream 51.beta renders the login-screen logo at its "natural" size
-(-1, -1) instead of a fixed height, which makes it render oversized.
-Pin the height to 48px instead.
-
-Run from the gnome-shell source root - this is invoked from
-overlay.nix's postPatch, not meant to be run standalone.
-"""
 import sys
 
 PATH = "js/gdm/loginDialog.js"
@@ -39,3 +30,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

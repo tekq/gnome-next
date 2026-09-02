@@ -1,21 +1,3 @@
-# The GNOME Next overlay: bleeding-edge (51.beta/rc) builds of the core
-# session packages, built from upstream release tarballs against the
-# current nixpkgs toolchain.
-#
-# Deliberately NOT overridden here - left in place as comments below so
-# they're easy to revisit, not deleted, since these were reverted for now
-# rather than ruled out for good:
-#   - gdm                    -> 51.beta causes constant login issues, and
-#                                breaks the lock screen and crashes sessions
-#   - gnome-control-center    -> build fails because of patches (TODO: fix)
-#   - gtk4, glib              -> only pulled in for gnome-control-center above,
-#                                 same patch/path problems
-#
-# WARNING: do not touch gnome-shell's `patches` or `postPatch` on a whim.
-# Changing them changes gnome-shell's derivation hash, which can force a
-# full from-source rebuild of everything downstream of it - including,
-# somehow, webkit. If you need to touch it, expect a very long CI run and
-# budget for it (see the workflow's per-job timeout).
 let
   gnomeVersion = "51.beta";
 in
@@ -122,9 +104,6 @@ final: prev: {
     buildInputs = old.buildInputs ++ [ final.cairo final.libgudev ];
     env.NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -I${final.cairo.dev}/include/cairo";
 
-    # HACK: only the first 3 of upstream nixpkgs' patches apply cleanly
-    # against ${gnomeVersion} - the rest fail outright. Worth re-checking
-    # against nixpkgs' patch list whenever this version is bumped.
     patches = final.lib.take 3 old.patches;
 
     postPatch = ''
@@ -135,9 +114,6 @@ final: prev: {
       substituteInPlace meson.build \
         --replace-fail "gjs = find_program('gjs')" "gjs = find_program('${final.lib.getExe final.gjs}')"
 
-      # 51.beta regression fixes for GDM (see scripts/ for what and why).
-      # Each script hard-fails if its expected text isn't found, instead of
-      # silently no-op'ing - so if a nixpkgs bump breaks one, CI tells you.
       python3 ${./scripts/fix-gdm-login-dialog.py}
       python3 ${./scripts/fix-gdm-auth-services-legacy.py}
     '';
