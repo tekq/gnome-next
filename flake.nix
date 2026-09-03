@@ -6,12 +6,16 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
-      let
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+  }:
+    flake-utils.lib.eachSystem ["x86_64-linux" "aarch64-linux"] (
+      system: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ self.overlays.default ];
+          overlays = [self.overlays.default];
         };
 
         overriddenPackages = [
@@ -21,15 +25,18 @@
           "gnome-session"
           "gnome-settings-daemon"
           "gnome-backgrounds"
+          "gnome-disk-utility"
           "gnome-shell"
         ];
       in {
-        packages = nixpkgs.lib.genAttrs overriddenPackages (name: pkgs.${name})
-          // { default = pkgs.gnome-shell; };
+        packages =
+          nixpkgs.lib.genAttrs overriddenPackages (name: pkgs.${name})
+          // {default = pkgs.gnome-shell;};
 
         checks = self.packages.${system};
       }
-    ) // {
+    )
+    // {
       overlays.default = import ./overlay.nix;
 
       nixosModules = rec {

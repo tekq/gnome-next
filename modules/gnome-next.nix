@@ -1,4 +1,8 @@
-{ config, lib, ... }: let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.gnome-next;
 in {
   options.gnome-next = {
@@ -6,6 +10,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [ (import ../overlay.nix) ];
+    nixpkgs.overlays = [(import ../overlay.nix)];
   };
 }
