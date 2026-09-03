@@ -69,7 +69,7 @@ in
         url = "mirror://gnome/sources/gnome-disk-utility/51/gnome-disk-utility-${gnomeVersion}.tar.xz";
         hash = "sha256-8YHXk/BoTzmb920pfA43FoScePpnKSt2Xb2ew9+lyAA=";
       };
-      buildInputs = old.buildInputs ++ [final.rustc final.gtk4];
+      buildInputs = old.buildInputs ++ [final.rustc final.cargo final.gtk4 final.libadwaita final.blueprint-compiler];
     });
 
     # build fails because of patches
