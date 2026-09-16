@@ -81,7 +81,7 @@ in
         url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
         hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
       };
-      # patches = [ ];
+      patches = [ ];
     });
 
     # dep of gnome-control-center, also fails because of patches
