@@ -25,6 +25,7 @@ in
         hash = "sha256-XSjzriJWkkKPyvuWUA1nPzQyi2mLhpYMnBRg0LHZg7M=";
       };
       outputs = ["out" "dev" "man"];
+      patches = final.lib.take 1 old.patches;
       mesonFlags =
         final.lib.filter
         (flag: !(final.lib.hasPrefix "-Degl_device=" flag || final.lib.hasPrefix "-Dwayland_eglstream=" flag))
