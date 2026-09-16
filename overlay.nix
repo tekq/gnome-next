@@ -112,7 +112,7 @@ in
         url = "mirror://gnome/sources/gnome-shell/51/gnome-shell-${gnomeVersion}.tar.xz";
         hash = "sha256-IXm6sTrzU0JwZQlq+L89MNp7huDFFuW6hqFJmK+VdfY=";
       };
-      buildInputs = old.buildInputs ++ [final.cairo final.libgudev];
+      buildInputs = old.buildInputs ++ [final.cairo final.libgudev final.libglycin];
       env.NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -I${final.cairo.dev}/include/cairo";
 
       patches = final.lib.take 3 old.patches;
