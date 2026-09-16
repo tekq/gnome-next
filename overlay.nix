@@ -43,7 +43,7 @@ in
       version = gnomeVersion;
       src = final.fetchurl {
         url = "mirror://gnome/sources/gnome-session/51/gnome-session-${gnomeVersion}.tar.xz";
-        hash = "sha256-Lj47baIMl0Z0F1Dfm9cautArKoyGAuTZfFzH+DWcjQQ=";
+        hash = "sha256-UZXE9gVCqVOrbr0ojzeFuOd0YpLYwWfgyZ01NDihhNE=";
       };
     });
 
