@@ -1,20 +1,20 @@
 let
-  gnomeVersion = "51.beta";
+  gnomeVersion = "51.0";
 in
   final: prev: {
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
         url = "mirror://gnome/sources/gsettings-desktop-schemas/51/gsettings-desktop-schemas-${gnomeVersion}.tar.xz";
-        hash = "sha256-S41IfDEu00VUN3ipLZdK/Pzot8wskIgI8ltyW5FSiRQ=";
+        hash = "sha256-HiQZpfIdJsMksorhwA4p6Rdei1lv/zhaBMIXKzZlIiY=";
       };
     });
 
     gnome-desktop = prev.gnome-desktop.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
-        url = "mirror://gnome/sources/gnome-desktop/51/gnome-desktop-51.alpha.tar.xz";
-        hash = "sha256-ik0JYY/siP/xVJ5bgKxBd276zLjWXbP7dzRbU5SBmTI=";
+        url = "mirror://gnome/sources/gnome-desktop/51/gnome-desktop-${gnomeVersion}.tar.xz";
+        hash = "sha256-nr658XadPDEMrq3ZIas0yPJkuSk3dAUYs7yFmleaaRI=";
       };
     });
 
@@ -22,7 +22,7 @@ in
       version = gnomeVersion;
       src = final.fetchurl {
         url = "mirror://gnome/sources/mutter/51/mutter-${gnomeVersion}.tar.xz";
-        hash = "sha256-pV0W+s6FIyLCpt0/1KjZIJVPY2LKkbWBeJqTA4Rsx1Q=";
+        hash = "sha256-XSjzriJWkkKPyvuWUA1nPzQyi2mLhpYMnBRg0LHZg7M=";
       };
       outputs = ["out" "dev" "man"];
       mesonFlags =
@@ -48,10 +48,10 @@ in
     });
 
     gnome-settings-daemon = prev.gnome-settings-daemon.overrideAttrs (old: {
-      version = "51.rc";
+      version = gnomeVersion;
       src = final.fetchurl {
-        url = "mirror://gnome/sources/gnome-settings-daemon/51/gnome-settings-daemon-51.rc.tar.xz";
-        hash = "sha256-RZNEiHZ9Tjz9FLFVf+2POoPLVPb/TUyyCY2d+Eanyxw=";
+        url = "mirror://gnome/sources/gnome-settings-daemon/51/gnome-settings-daemon-${gnomeVersion}.tar.xz";
+        hash = "sha256-fGJJEY3f/8S7NNaz7aqGs+oCoa0rdxHXlIB0mQZ2dmU=";
       };
     });
 
@@ -109,7 +109,7 @@ in
       version = gnomeVersion;
       src = final.fetchurl {
         url = "mirror://gnome/sources/gnome-shell/51/gnome-shell-${gnomeVersion}.tar.xz";
-        hash = "sha256-m5TCYSAliXKsVJSywRtYN1X4pUEdKf4oUPQm2AT/uyY=";
+        hash = "sha256-IXm6sTrzU0JwZQlq+L89MNp7huDFFuW6hqFJmK+VdfY=";
       };
       buildInputs = old.buildInputs ++ [final.cairo final.libgudev];
       env.NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -I${final.cairo.dev}/include/cairo";
