@@ -59,7 +59,7 @@ in
       version = gnomeVersion;
       src = final.fetchurl {
         url = "mirror://gnome/sources/gnome-backgrounds/51/gnome-backgrounds-${gnomeVersion}.tar.xz";
-        hash = "sha256-trvTwNwZyWhJeb9Al9SM2Xs8SALIra/6LoLCBI8xVs8=";
+        hash = "sha256-WBHSQRjXj0G2bGFu+xCUwgUHy1RuSE3KSWP+c4pLp9s=";
       };
     });
 
