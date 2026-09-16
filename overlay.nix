@@ -64,9 +64,9 @@ in
     });
 
     gnome-disk-utility = prev.gnome-disk-utility.overrideAttrs (old: {
-      version = gnomeVersion;
+      version = "51.beta";
       src = final.fetchurl {
-        url = "mirror://gnome/sources/gnome-disk-utility/51/gnome-disk-utility-${gnomeVersion}.tar.xz";
+        url = "mirror://gnome/sources/gnome-disk-utility/51/gnome-disk-utility-51.beta.tar.xz";
         hash = "sha256-8YHXk/BoTzmb920pfA43FoScePpnKSt2Xb2ew9+lyAA=";
       };
       buildInputs = old.buildInputs ++ [final.rustc final.cargo final.gtk4 final.libadwaita final.blueprint-compiler];
