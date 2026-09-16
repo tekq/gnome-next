@@ -75,14 +75,14 @@ in
 
     # build fails because of patches
     # TODO: fix build
-    gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
-      version = gnomeVersion;
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
-        hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
-      };
-      patches = [ ];
-    });
+    #gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
+    #  version = gnomeVersion;
+    #  src = final.fetchurl {
+    #    url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
+    #    hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
+    #  };
+    #  patches = [ ];
+    #});
 
     # dep of gnome-control-center, also fails because of patches
     # gtk4 = prev.gtk4.overrideAttrs (old: {
