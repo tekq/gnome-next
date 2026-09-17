@@ -56,10 +56,10 @@ in
       };
     });
 
-    ibus = prev.ibus.overrideAttrs (old: {
-      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
-    });
+#    ibus = prev.ibus.overrideAttrs (old: {
+#      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+#      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+#    });
 
     mutter = prev.mutter.overrideAttrs (old: {
       version = gnomeVersion;
@@ -75,13 +75,13 @@ in
         old.mesonFlags;
     });
 
-    gdm = prev.gdm.overrideAttrs (old: {
-      version = gnomeVersion;
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/gdm/51/gdm-${gnomeVersion}.tar.xz";
-        hash = "sha256-omXuGFbL+X9Q2uPwh68iRMvbbWGW7NqjgsHOa4MNM7Y=";
-      };
-    });
+#    gdm = prev.gdm.overrideAttrs (old: {
+#      version = gnomeVersion;
+#      src = final.fetchurl {
+#        url = "mirror://gnome/sources/gdm/51/gdm-${gnomeVersion}.tar.xz";
+#        hash = "sha256-LOWs9aQ4uPbcHRT9d3qRG+XusvermnxGABZiBbFdZTY=";
+#      };
+#    });
 
     gnome-session = prev.gnome-session.overrideAttrs (old: {
       version = gnomeVersion;
@@ -116,28 +116,28 @@ in
       buildInputs = old.buildInputs ++ [final.rustc final.cargo final.gtk4 final.libadwaita final.blueprint-compiler];
     });
 
-    nautilus = prev.nautilus.overrideAttrs (old: {
-      version = "51.0.1";
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
-        hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
-      };
-      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
-    });
+#    nautilus = prev.nautilus.overrideAttrs (old: {
+#      version = "51.0.1";
+#      src = final.fetchurl {
+#        url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
+#        hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
+#      };
+#      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+#      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+#    });
 
-    gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
-      version = gnomeVersion;
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
-        hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
-      };
-
-     patches = [ ];
-
-      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
-    });
+#    gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
+#      version = gnomeVersion;
+#      src = final.fetchurl {
+#        url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
+#        hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
+#      };
+#
+#      patches = [ ];
+#
+#      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+#      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+#    });
 
     gnome-shell = prev.gnome-shell.overrideAttrs (old: {
       version = gnomeVersion;
