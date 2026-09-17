@@ -1,5 +1,5 @@
 {
-  description = "GNOME Next: bleeding-edge (51.beta) GNOME package overrides for NixOS, built from source";
+  description = "GNOME Next: bleeding-edge GNOME package overrides for NixOS, ethically sourced";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
