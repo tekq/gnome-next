@@ -29,6 +29,7 @@
           "gnome-shell"
           "nautilus"
           "glib"
+          "glibmm"
         ];
       in {
         packages =
