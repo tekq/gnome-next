@@ -29,8 +29,7 @@
           "gnome-shell"
           "nautilus"
           "glib"
-          "glibmm"
-          "libxmlxx3"
+          "glibmm_2_68"
         ];
       in {
         packages =
