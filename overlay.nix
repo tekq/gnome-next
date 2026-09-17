@@ -103,13 +103,13 @@ in
     # });
 
     # dep of gnome-control-center, likely fails because of unfixed paths
-    # glib = prev.glib.overrideAttrs (old: {
-    #   version = "2.89.4";
-    #   src = final.fetchurl {
-    #     url = "mirror://gnome/sources/glib/2.89/glib-2.89.4.tar.xz";
-    #     hash = "sha256-HNu3mfVYgy5vFLgze1/VmcaRirFEl3tV4F4ApeLoSiw=";
-    #   };
-    # });
+    glib = prev.glib.overrideAttrs (old: {
+      version = "2.90.0";
+      src = final.fetchurl {
+        url = "mirror://gnome/sources/glib/2.90/glib-2.90.0.tar.xz";
+        hash = "";
+      };
+    });
 
     # WARNING: see the note at the top of this file before touching anything
     # in this derivation - it's the one that (transitively) drags webkit into
