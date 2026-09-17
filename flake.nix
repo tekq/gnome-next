@@ -30,6 +30,7 @@
           "nautilus"
           "glib"
           "glibmm"
+          "libxmlxx3"
         ];
       in {
         packages =
