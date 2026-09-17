@@ -27,8 +27,10 @@
           "gnome-backgrounds"
           "gnome-disk-utility"
           "gnome-shell"
-          "nautilus"
-          "ibus"
+          #"gnome-control-center" # doesn't compile
+          #"nautilus" # borked at runtime
+          #"ibus" # ?
+          #"gdm" # breaks desktop
         ];
       in {
         packages =

@@ -75,13 +75,13 @@ in
         old.mesonFlags;
     });
 
-    # gdm = prev.gdm.overrideAttrs (old: {
-    #   version = gnomeVersion;
-    #   src = final.fetchurl {
-    #     url = "mirror://gnome/sources/gdm/51/gdm-${gnomeVersion}.tar.xz";
-    #     hash = "sha256-omXuGFbL+X9Q2uPwh68iRMvbbWGW7NqjgsHOa4MNM7Y=";
-    #   };
-    # });
+    gdm = prev.gdm.overrideAttrs (old: {
+      version = gnomeVersion;
+      src = final.fetchurl {
+        url = "mirror://gnome/sources/gdm/51/gdm-${gnomeVersion}.tar.xz";
+        hash = "sha256-omXuGFbL+X9Q2uPwh68iRMvbbWGW7NqjgsHOa4MNM7Y=";
+      };
+    });
 
     gnome-session = prev.gnome-session.overrideAttrs (old: {
       version = gnomeVersion;
@@ -126,30 +126,19 @@ in
       nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
     });
 
-    # build fails because of patches
-    # TODO: fix build
-    #gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
-    #  version = gnomeVersion;
-    #  src = final.fetchurl {
-    #    url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
-    #    hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
-    #  };
-    #  patches = [ ];
-    #});
+    gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {
+      version = gnomeVersion;
+      src = final.fetchurl {
+        url = "mirror://gnome/sources/gnome-control-center/51/gnome-control-center-${gnomeVersion}.tar.xz";
+        hash = "sha256-yMpbagrkT9DWSqxao7eag8JEUJWxWanRPRycwXKsT7k=";
+      };
 
-    # dep of gnome-control-center, also fails because of patches
-    # gtk4 = prev.gtk4.overrideAttrs (old: {
-    #   version = "4.23.4";
-    #   src = final.fetchurl {
-    #     url = "mirror://gnome/sources/gtk/4.23/gtk-4.23.4.tar.xz";
-    #     hash = "sha256-Wd9xJEzyBgG0JdGhOyp+gFuFTTteEa0l9/mOYTz8W60=";
-    #   };
-    #   patches = [ ];
-    # });
+     patches = [ ];
 
-    # WARNING: see the note at the top of this file before touching anything
-    # in this derivation - it's the one that (transitively) drags webkit into
-    # the build.
+      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+    });
+
     gnome-shell = prev.gnome-shell.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
