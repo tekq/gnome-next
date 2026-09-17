@@ -119,6 +119,10 @@ in
       };
     });
 
+    pipewire = prev.pipewire.override {
+      ffadoSupport = false;
+    };
+
     # WARNING: see the note at the top of this file before touching anything
     # in this derivation - it's the one that (transitively) drags webkit into
     # the build.
