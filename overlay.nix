@@ -19,8 +19,6 @@ in
     });
 
     gtk_4_24 = (prev.gtk4.override {
-      glib = glib_2_90;
-      pango = pango_1_58;
     }).overrideAttrs (old: {
       version = "4.24.0";
       src = final.fetchurl {
@@ -41,14 +39,6 @@ in
         ''
       ] [ "" ] old.postInstall;
     });
-
-    ibus_bump = (prev.ibus.override {
-      gtk4 = gtk_4_24;
-      glib = glib_2_90;
-    }).overrideAttrs (old: {
-      buildInputs = [pango_1_58 glib_2_90 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [pango_1_58.dev glib_2_90.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
-    });
   in {
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
       version = gnomeVersion;
@@ -64,6 +54,11 @@ in
         url = "mirror://gnome/sources/gnome-desktop/51/gnome-desktop-${gnomeVersion}.tar.xz";
         hash = "sha256-nr658XadPDEMrq3ZIas0yPJkuSk3dAUYs7yFmleaaRI=";
       };
+    });
+
+    ibus = prev.ibus.overrideAttrs (old: {
+      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
     });
 
     mutter = prev.mutter.overrideAttrs (old: {
@@ -127,8 +122,8 @@ in
         url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
         hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
       };
-      buildInputs = [glib_2_90 gtk_4_24 ibus_bump] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev ibus_bump.dev] ++ old.nativeBuildInputs;
+      buildInputs = [glib_2_90 gtk_4_24] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
     });
 
     # build fails because of patches

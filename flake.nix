@@ -28,6 +28,7 @@
           "gnome-disk-utility"
           "gnome-shell"
           "nautilus"
+          "ibus"
         ];
       in {
         packages =
