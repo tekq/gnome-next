@@ -40,6 +40,11 @@ in
       ] [ "" ] old.postInstall;
     });
   in {
+    ibus = prev.ibus.overrideAttrs (old: {
+      buildInputs = [glib_2_90 gtk_4_24] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+    });
+
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
