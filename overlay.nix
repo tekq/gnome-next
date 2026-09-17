@@ -73,6 +73,14 @@ in
       buildInputs = old.buildInputs ++ [final.rustc final.cargo final.gtk4 final.libadwaita final.blueprint-compiler];
     });
 
+    nautilus = prev.nautilus.overrideAttrs (old: {
+      version = gnomeVersion;
+      src = final.fetchurl {
+        url = "mirror://gnome/sources/nautilus/51/nautilus-${gnomeVersion}.tar.xz";
+        hash = "";
+      };
+    });
+
     # build fails because of patches
     # TODO: fix build
     #gnome-control-center = prev.gnome-control-center.overrideAttrs (old: {

@@ -27,6 +27,7 @@
           "gnome-backgrounds"
           "gnome-disk-utility"
           "gnome-shell"
+          "nautilus"
         ];
       in {
         packages =
