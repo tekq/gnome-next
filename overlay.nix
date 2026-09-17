@@ -16,7 +16,10 @@ in
         hash = "sha256-NCOFtso7fHNFXXyAoTt9vkSJ4AvDvUxb1u1NzkIeN0o=";
       };
     });
-    gtk_4_24 = prev.gtk4.overrideAttrs (old: {
+    gtk_4_24 = (prev.gtk4.override {
+      glib = glib_2_90;
+      pango = pango_1_58;
+    }).overrideAttrs (old: {
       version = "4.24.0";
       src = final.fetchurl {
         url = "mirror://gnome/sources/gtk/4.24/gtk-4.24.0.tar.xz";
@@ -25,7 +28,16 @@ in
       buildInputs = [glib_2_90 pango_1_58 final.cmake] ++ old.buildInputs;
       nativeBuildInputs = [glib_2_90.dev pango_1_58.dev] ++ old.nativeBuildInputs;
 
-      patches = [];
+      patches = []; # drop VK patch
+
+      postInstall = builtins.replaceStrings [
+        ''
+          # TODO: patch glib directly
+          for f in $dev/bin/gtk4-encode-symbolic-svg; do
+            wrapProgram $f --prefix XDG_DATA_DIRS : "${final.shared-mime-info}/share"
+          done
+        ''
+      ] [ "" ] old.postInstall;
     });
   in {
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
