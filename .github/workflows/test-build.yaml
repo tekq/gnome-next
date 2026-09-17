@@ -1,0 +1,67 @@
+name: Check that this builds
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-independent:
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - gsettings-desktop-schemas
+          - gnome-desktop
+          - gnome-backgrounds
+          - gnome-settings-daemon
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: cachix/install-nix-action@v31
+
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - run: nix build ".#${{ matrix.package }}" -L
+
+  build-mutter:
+    needs: build-independent
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: nix build .#mutter -L
+
+  build-gnome-session:
+    needs: build-independent
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - run: nix build .#gnome-session -L
+
+  build-gnome-shell:
+    needs: [build-mutter, build-gnome-session]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: nix build .#gnome-shell -L
+
+  build-nautilus:
+    needs: build-independent
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: nix build .#gnome-shell -L
