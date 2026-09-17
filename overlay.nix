@@ -32,8 +32,8 @@ in
         url = "mirror://gnome/sources/gtk/4.24/gtk-4.24.0.tar.xz";
         hash = "sha256-KLpKwcBPhurAm3mhY8sWOkwrVEQtn37MwEZ5BipYEEQ=";
       };
-      buildInputs = [glib_2_90 pango_1_58 ibus_bump final.cmake] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev ibus_bump.dev] ++ old.nativeBuildInputs;
+      buildInputs = [glib_2_90 pango_1_58 final.cmake] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev] ++ old.nativeBuildInputs;
 
       patches = []; # drop VK patch
 
@@ -124,8 +124,8 @@ in
         url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
         hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
       };
-      buildInputs = [glib_2_90 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
+      buildInputs = [glib_2_90 gtk_4_24 ibus_bump] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev ibus_bump.dev] ++ old.nativeBuildInputs;
     });
 
     # build fails because of patches
