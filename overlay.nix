@@ -107,7 +107,7 @@ in
       version = "2.90.0";
       src = final.fetchurl {
         url = "mirror://gnome/sources/glib/2.90/glib-2.90.0.tar.xz";
-        hash = "";
+        hash = "sha256-F9FcrCr4CjMnESdAjgq8J0jrKXxZXComQJ6B4U59G48=";
       };
     });
 
