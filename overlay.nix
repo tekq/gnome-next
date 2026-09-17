@@ -117,7 +117,7 @@ in
         url = "mirror://gnome/sources/glibmm/2.90/glibmm-2.90.0.tar.xz";
         hash = "sha256-4u+kVkPxa5/qLWKZ8vQD1nLq6s3fD/f4CU4a+bD1mAs=";
       };
-      buildInputs = old.buildInputs ++ [final.cmake];
+      buildInputs = [final.cmake final.libsigcxx30];
     });
 
     # WARNING: see the note at the top of this file before touching anything
