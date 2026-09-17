@@ -21,6 +21,7 @@ in
     ibus_bump = prev.ibus.override {
       gtk4 = gtk_4_24;
       glib = glib_2_90;
+      pango = pango_1_58;
     };
 
     gtk_4_24 = (prev.gtk4.override {
