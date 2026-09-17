@@ -122,8 +122,8 @@ in
         url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
         hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
       };
-      buildInputs = old.buildInputs ++ [glib_2_90 gtk_4_24 pango_1_58];
-      nativeBuildInputs = old.nativeBuildInputs ++ [glib_2_90.dev gtk_4_24.dev pango_1_58.dev];
+      buildInputs = [glib_2_90 pango_1_58 gtk_4_24] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
     });
 
     # build fails because of patches
