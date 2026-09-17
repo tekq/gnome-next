@@ -21,7 +21,9 @@ in
     ibus_bump = prev.ibus.override {
       gtk4 = gtk_4_24;
       glib = glib_2_90;
-      pango = pango_1_58;
+
+      buildInputs = [pango_1_58] ++ old.buildInputs;
+      nativeBuildInputs = [pango_1_58.dev] ++ old.nativeBuildInputs;
     };
 
     gtk_4_24 = (prev.gtk4.override {
