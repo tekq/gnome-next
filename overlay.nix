@@ -74,9 +74,9 @@ in
     });
 
     nautilus = prev.nautilus.overrideAttrs (old: {
-      version = gnomeVersion;
+      version = "51.0.1";
       src = final.fetchurl {
-        url = "mirror://gnome/sources/nautilus/51/nautilus-${gnomeVersion}.tar.xz";
+        url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
         hash = "";
       };
     });
