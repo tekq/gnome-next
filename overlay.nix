@@ -9,6 +9,7 @@ in
         hash = "sha256-F9FcrCr4CjMnESdAjgq8J0jrKXxZXComQJ6B4U59G48=";
       };
     });
+
     pango_1_58 = prev.pango.overrideAttrs (old: {
       version = "1.58.2";
       src = final.fetchurl {
@@ -16,6 +17,12 @@ in
         hash = "sha256-NCOFtso7fHNFXXyAoTt9vkSJ4AvDvUxb1u1NzkIeN0o=";
       };
     });
+
+    ibus_bump = prev.ibus.override {
+      gtk4 = gtk_4_24;
+      glib = glib_2_90;
+    };
+
     gtk_4_24 = (prev.gtk4.override {
       glib = glib_2_90;
       pango = pango_1_58;
@@ -25,8 +32,8 @@ in
         url = "mirror://gnome/sources/gtk/4.24/gtk-4.24.0.tar.xz";
         hash = "sha256-KLpKwcBPhurAm3mhY8sWOkwrVEQtn37MwEZ5BipYEEQ=";
       };
-      buildInputs = [glib_2_90 pango_1_58 final.cmake] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev] ++ old.nativeBuildInputs;
+      buildInputs = [glib_2_90 pango_1_58 ibus_bump final.cmake] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev pango_1_58.dev ibus_bump.dev] ++ old.nativeBuildInputs;
 
       patches = []; # drop VK patch
 
@@ -40,11 +47,6 @@ in
       ] [ "" ] old.postInstall;
     });
   in {
-    ibus = prev.ibus.overrideAttrs (old: {
-      buildInputs = [glib_2_90 gtk_4_24] ++ old.buildInputs;
-      nativeBuildInputs = [glib_2_90.dev gtk_4_24.dev] ++ old.nativeBuildInputs;
-    });
-
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
