@@ -77,7 +77,7 @@ in
       version = "51.0.1";
       src = final.fetchurl {
         url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
-        hash = "";
+        hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
       };
     });
 
