@@ -1,7 +1,15 @@
 let
   gnomeVersion = "51.0";
 in
-  final: prev: {
+  final: prev: let
+    glib_2_90 = prev.glib.overrideAttrs (old: {
+      version = "2.90.0";
+      src = final.fetchurl {
+        url = "mirror://gnome/sources/glib/2.90/glib-2.90.0.tar.xz";
+        hash = "sha256-F9FcrCr4CjMnESdAjgq8J0jrKXxZXComQJ6B4U59G48=";
+      };
+    });
+  in {
     gsettings-desktop-schemas = prev.gsettings-desktop-schemas.overrideAttrs (old: {
       version = gnomeVersion;
       src = final.fetchurl {
@@ -79,6 +87,8 @@ in
         url = "mirror://gnome/sources/nautilus/51/nautilus-51.0.1.tar.xz";
         hash = "sha256-oA25CP1lAmy9XcY04S0YnejrorA/EF0kJTQXaKXukvs=";
       };
+      buildInputs = [glib_2_90] ++ old.buildInputs;
+      nativeBuildInputs = [glib_2_90.dev] ++ old.nativeBuildInputs;
     });
 
     # build fails because of patches
@@ -101,27 +111,6 @@ in
     #   };
     #   patches = [ ];
     # });
-
-    # dep of gnome-control-center, likely fails because of unfixed paths
-    glib = prev.glib.overrideAttrs (old: {
-      version = "2.90.0";
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/glib/2.90/glib-2.90.0.tar.xz";
-        hash = "sha256-F9FcrCr4CjMnESdAjgq8J0jrKXxZXComQJ6B4U59G48=";
-      };
-    });
-
-    glibmm_2_68 = prev.glibmm_2_68.overrideAttrs (old: {
-      version = "2.90.0";
-      src = final.fetchurl {
-        url = "mirror://gnome/sources/glibmm/2.90/glibmm-2.90.0.tar.xz";
-        hash = "sha256-4u+kVkPxa5/qLWKZ8vQD1nLq6s3fD/f4CU4a+bD1mAs=";
-      };
-    });
-
-    pipewire = prev.pipewire.override {
-      ffadoSupport = false;
-    };
 
     # WARNING: see the note at the top of this file before touching anything
     # in this derivation - it's the one that (transitively) drags webkit into

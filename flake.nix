@@ -28,8 +28,6 @@
           "gnome-disk-utility"
           "gnome-shell"
           "nautilus"
-          "glib"
-          "glibmm_2_68"
         ];
       in {
         packages =
