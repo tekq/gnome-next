@@ -1,4 +1,4 @@
-{
+self: {
   config,
   lib,
   ...
@@ -6,10 +6,10 @@
   cfg = config.gnome-next;
 in {
   options.gnome-next = {
-    enable = lib.mkEnableOption "GNOME Next (51.beta) package overrides";
+    enable = lib.mkEnableOption "GNOME Next";
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [(import ../overlay.nix)];
+    nixpkgs.overlays = lib.mkBefore [self.overlays.default];
   };
 }
