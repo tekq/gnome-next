@@ -1,7 +1,7 @@
 let
   gnomeVersion = "51.0";
 in
-# final: prev: {
+final: prev: {
 #   gnome-shell = prev.gnome-shell.overrideAttrs (old: {
 
 #       patches = old.patches ++ [
