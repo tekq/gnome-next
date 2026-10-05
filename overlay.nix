@@ -5,7 +5,7 @@ final: prev: {
   gnome-shell = prev.gnome-shell.overrideAttrs (old: {
 
       patches = old.patches ++ [
-(final.fetchpatch {
+(final.fetchpatch { # Patch GNOME Shell with new search
           url = "https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/233c760cfe7b557f1cb351316d229de586fd2b9f.patch";
           hash = "sha256-uOrntaCOoHcka4EIE0D2wffAq1eSoiPlJ3rv1eP7sCc=";
         })
