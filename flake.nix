@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # NixOS/nixpkgs#559510
+    # NixOS/nixpkgs#559510, should hit Hydra for the most part
     nixpkgs-gnome.url = "github:theCapypara/nixpkgs/gnome51";
 
     flake-utils.url = "github:numtide/flake-utils";
